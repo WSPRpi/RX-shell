@@ -6,7 +6,7 @@ while true
 do
 	minute=$(date +"%M")
 	second=$(date +"%S")
-	if [ "$second" = "00" ]
+	if [[ "$second" == "00" && $((minute % 2)) == 0 ]]
 	then
 		echo $(date +"%H-%M-%S")"  Recording"
 		sudo arecord -f S16_LE -r 96000 --duration=118 -q -t wav -D hw:0,0 -c 2 /mnt/ramdisk/test_"$buffer_num".wav
@@ -15,7 +15,7 @@ do
 		echo $(date +"%H-%M-%S")"  Recording Complete into buffer ""$buffer_num"
 		~/wsprd /mnt/ramdisk/test_"$buffer_num".wav &
 		decode_pid=$!
-		if [ "$buffer_num" = "0" ]
+		if [ "$buffer_num" == "0" ]
 		then
 			buffer_num="1"
 		else
