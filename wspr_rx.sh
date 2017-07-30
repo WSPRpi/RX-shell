@@ -7,18 +7,18 @@ first="0"
 
 
 if [[ "$#" != 2 ]]
-then 
-	echo "Usage is of the format ./wspr_rx.sh callsign locator"
-	echo "Example: \"./wspr_rx.sh m0wut jo02af\""
+then
+	echo "Usage is of the format ./wspr_rx.sh callsign locator "
+	echo "Example: \"./wspr_rx.sh m0wut jo02af \""
 	exit 1
 fi
 echo "WSPR Decoder by M0WUT: Callsign = ""$1"", Locator = ""$2"
 echo $(date +"%H-%M-%S")"  Started, waiting for even minute"
 while true
 do
-	minute=$(date +"%M")
-	second=$(date +"%S")
-	if (( $second == 0 )) && (( $minute % 2 == 0 ))
+	minute=$(date +"%-M")
+	second=$(date +"%-S")
+	if (( $second == 0 )) && (( (($minute % 2)) == 0 ))
 	then
 		sudo arecord -f S16_LE -r 96000 --duration=118 -q -t wav -D hw:0,0 -c 2 /mnt/ramdisk/test_"$buffer_num".wav &
 		record_pid=$!
@@ -30,6 +30,7 @@ do
 				:
 			done
 			echo $(date +"%H-%M-%S")"  Decode of buffer ""$old_buffer"" finished, uploading spots"
+			awk '{$6=sprintf("%.7f",$6+14.0956); print}' ALL_WSPR.TXT >> /mnt/ramdisk/temp.txt && rm ALL_WSPR.TXT && mv /mnt/ramdisk/temp.txt ALL_WSPR.TXT
 			#curl -F allmept=@ALL_WSPR.TXT -F call="$1" -F grid="$2" wsprnet.org/meptspots.php
 		else
 			echo $(date +"%H-%M-%S")"  Recording into buffer ""$buffer_num"", no buffer to decode"
