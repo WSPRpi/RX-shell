@@ -30,8 +30,8 @@ do
 				:
 			done
 			echo $(date +"%H-%M-%S")"  Decode of buffer ""$old_buffer"" finished, uploading spots"
-			awk '{$6=sprintf("%.7f",$6+14.0956); print}' ALL_WSPR.TXT >> /mnt/ramdisk/temp.txt && rm ALL_WSPR.TXT && mv /mnt/ramdisk/temp.txt ALL_WSPR.TXT
-			#curl -F allmept=@ALL_WSPR.TXT -F call="$1" -F grid="$2" wsprnet.org/meptspots.php
+			awk '{$6=sprintf("%.7f",$6+14.0956); print}' ALL_WSPR.TXT >> corrected_wspr.txt && rm ALL_WSPR.TXT 
+			#curl -F allmept=@corrected_wspr.txt -F call="$1" -F grid="$2" wsprnet.org/meptspots.php
 		else
 			echo $(date +"%H-%M-%S")"  Recording into buffer ""$buffer_num"", no buffer to decode"
 			first="1"
