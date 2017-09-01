@@ -1,14 +1,14 @@
 Shell based decoder for WSPR
 
 Requisites:
-libfftw3-3
+libfftw3-3 (apt install libfftw3-dev)
+sox (apt install sox)
 wsprd (executable installed with wsjtx) I installed full WSJTX onto Pi, copied the wsprd file, reflashed OS and transferred the executable back
 100MB RAM mounted in /mnt/ramdisk (prevents lots of writing to SD card)
 
-Simple shell script which Records 118 seconds of audio, then passes it to wsprd decoding software
-This is then scraped by the scraper software written by M0IKY (Michael Rawson on github) for further processing
+Simple shell script which Records 114 seconds of audio, then passes it to wsprd decoding software
 
-TODO: Add upload feature and a way to correct the frequency (currently only gives AF frequency so need to add RF offset)
+TODO: sometimes the even minute detection triggers on odd minuted (but not always)
 
 
 
