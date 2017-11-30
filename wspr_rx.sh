@@ -1,5 +1,5 @@
 #!/bin/bash
-##Assorted insanity by M0WUT to make a better WSPR decoder
+#Assorted insanity by M0WUT to make a better WSPR decoder
 
 if [[ "$#" != 3 ]]
 then
