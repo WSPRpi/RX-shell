@@ -15,7 +15,7 @@ sudo arecord -f S16_LE -r 48000 --duration=114 -q -t wav -D hw:0,0 -c 2 /mnt/ram
 echo "Recording complete"
 sox /mnt/ramdisk/raw.wav -c 1 -r 12000 output.wav
 echo "Decimation complete"
-~/wspr_rx/wsprd -wf "$3" test.wav >/dev/null 2>&1
+~/wspr_rx/wsprd -wf "$3" output.wav >/dev/null 2>&1
 sed -i 's/tput   //g' ALL_WSPR.TXT
 sed -i "s/^....../$start_time/g" ALL_WSPR.TXT
 echo ""
