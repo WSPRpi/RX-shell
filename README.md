@@ -1,16 +1,11 @@
-Shell based decoder for WSPR
+# Shell-based decoder for WSPR
+Simple shell script which Records 114 seconds of audio, then passes it to wsprd decoding software.
 
 Requisites:
 * libfftw3-3 (apt install libfftw3-dev)
+* arecord (apt install alsa-utils)
 * sox (apt install sox)
-* wsprd (executable installed with wsjtx) I installed full WSJTX onto Pi, copied the wsprd file, reflashed OS and transferred the executable back
-* 100MB RAM mounted in /mnt/ramdisk (prevents lots of writing to SD card)
+* wsprd (executable installed with wsjtx) install full WSJTX onto Pi, copy the wsprd file, reflash OS and transferred the executable back
 
-Simple shell script which Records 114 seconds of audio, then passes it to wsprd decoding software
-
-ALL_WSPR.TXT is example output
-
-
-
-
-
+All binaries (arecord, sox, wsprd) must be on the `$PATH` for this script to work.
+ALL_WSPR.TXT is example output.
