@@ -1,3 +1,5 @@
+YYMMDD, HHMM, no idea,	Signal to Noise (dB), Difference in clocks (seconds) i.e. How many seconds out the transmission started from expected, not important, Frequency, Callsign, Locator, Reported Power (dBm), drift(Hz), last two are azimuth and distance, calculated wrongly  
+
 171203 1430 5 -18 -2.92  14.0970533  EA4DTE IN80 27          2     1    0
 171203 1430 3 -16 -3.01  14.0970896  TA2AEG KN40 40          2     1    0
 171203 1430 2 -23 -4.11  14.0971325  OK2TRN JN88 23          2  3865    0
