@@ -1,0 +1,22 @@
+#!/bin/sh
+#Assorted insanity by M0WUT to make a better WSPR decoder
+
+if test "$#" -ne 3
+then
+	echo "Usage is of the format ./wspr-rx callsign locator frequency(in MHz)"
+	echo "Example: \"./wspr-rx m0wut jo02af 14.0956 \""
+	exit 1
+fi
+echo "WSPR Decoder by M0WUT: Callsign = $1, Locator = $2, Frequency = $3"
+
+start_time=$(date +"%y%m%d %H%M")
+
+echo "Recording..."
+echo ""
+echo ""
+
+arecord -f S16_LE -r 48000 --duration=114 -q -t wav -D hw:0,0 -c 2 | sox -t wav -c 1 -r 12000 - -t wav - | wsprd -wf "$3" /dev/stdin | sed "s/tput   //g;s/^....../$start_time/g"
+
+echo "Uploading..."
+#curl -F allmept=@ALL_WSPR.TXT -F call="$1" -F grid="$2" wsprnet.org/meptspots.php >/dev/null 2>&1
+echo "...done."
