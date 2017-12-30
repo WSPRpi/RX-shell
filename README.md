@@ -8,3 +8,6 @@ Requisites:
 * wsprd: git clone [https://github.com/WSPRpi/WSPR-Decoder.git](https://github.com/WSPRpi/WSPR-Decoder.git), make, copy output executable to path
 
 sample.TXT is example output.
+
+To run continually, test.py is provided, please change details to your own.
+Line 7 should read "subprocess.call(['wspr-rx', '$YOUR_CALLSIGN', '$YOUR_LOCATOR', '$FREQUENCY_IN_MHZ'])"
