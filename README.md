@@ -10,4 +10,4 @@ Requisites:
 sample.TXT is example output.
 
 To run continually, test.py is provided, please change details to your own.
-Line 7 should read "subprocess.call(['wspr-rx', '$YOUR_CALLSIGN', '$YOUR_LOCATOR', '$FREQUENCY_IN_MHZ'])"
+Line 7 should read "subprocess.call(['wspr-rx', 'YOUR_CALLSIGN', 'YOUR_LOCATOR', 'FREQUENCY_IN_MHZ'])"
