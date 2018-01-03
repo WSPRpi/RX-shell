@@ -4,7 +4,7 @@ import threading
 import sys
 
 def start_wspr_rx():
-	subprocess.call(['./wspr-rx', 'm0wut', 'aa0aa', '14.0956'])
+	subprocess.call(['./wspr-rx', 'm0wut', 'io93fp', '14.0956'])
 
 
 if __name__ == "__main__":
@@ -18,7 +18,7 @@ if __name__ == "__main__":
 				t.start()
 			except:
 				sys.exit(1)
-			
+
 			time.sleep(1)
 		if threading.active_count() > 3:
 			#Something has gone wrong

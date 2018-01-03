@@ -12,16 +12,8 @@ echo "WSPR Decoder by M0WUT: Callsign = $1, Locator = $2, Frequency = $3"
 start_time=$(date +"%y%m%d %H%M")
 
 echo "Recording..."
-echo ""
-echo ""
-arecord -B 2000000 -f S16_LE -r 48000 --duration=114 -q -D hw:0,0 -c 2 -t wav - | sox -t wav - -c 1 -r 12000 -t wav - | wsprd -wf "$3" /dev/stdin | sed "s/tput   //g;s/^....../$start_time /g" > ALL_WSPR.TXT
-echo ""
-echo ""
-cat ALL_WSPR.TXT
-echo ""
-echo ""
-#curl -F allmept=@ALL_WSPR.TXT -F call="$1" -F grid="$2" wsprnet.org/meptspots.php >/dev/null 2>&1
+arecord -B 2000000 -f S16_LE -r 48000 --duration=114 -q -D hw:0,0 -c 2 -t wav - | sox -t wav - -c 1 -r 12000 -t wav - | wsprd -wf "$3" /dev/stdin | tee /dev/tty | curl -F allmept=@- -F call="$1" -F grid="$2" wsprnet.org/meptspots.php
 echo "Upload complete"
-#rm ALL_WSPR.TXT
+
 
 
