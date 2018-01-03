@@ -1,5 +1,5 @@
 #!/bin/sh
-#Assorted insanity by M0WUT to make a better WSPR decoder
+#Assorted insanity by M0WUT and M0IKY to make a better WSPR decoder
 
 if test "$#" -ne 3
 then
@@ -7,13 +7,16 @@ then
 	echo "Example: \"./wspr-rx m0wut jo02af 14.0956 \""
 	exit 1
 fi
-echo "WSPR Decoder by M0WUT: Callsign = $1, Locator = $2, Frequency = $3"
 
-start_time=$(date +"%y%m%d %H%M")
+arecord -B 2000000 -f S16_LE -r 48000 --duration=114 -q -D hw:0,0 -c 2 -t wav - | #Record audio for 114 seconds
+sox -t wav - -c 1 -r 12000 -t wav - | #trim audio to 12k mono
+wsprd -wf "$3" /dev/stdin | #run WSPR decoder
+tee /dev/tty | #print decoded callsign to console
+curl -sF allmept=@- -F call="$1" -F grid="$2" wsprnet.org/meptspots.php | #Upload spots
+grep spot | #Select line in wspr server reply that contains whether the spots were uploaded
+tr '<br>' '  \r\n'  #remove html junk
 
-echo "Recording..."
-arecord -B 2000000 -f S16_LE -r 48000 --duration=114 -q -D hw:0,0 -c 2 -t wav - | sox -t wav - -c 1 -r 12000 -t wav - | wsprd -wf "$3" /dev/stdin | tee /dev/tty | curl -F allmept=@- -F call="$1" -F grid="$2" wsprnet.org/meptspots.php
-echo "Upload complete"
+
 
 
 
